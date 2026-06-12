@@ -1,8 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, act, renderHook } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import NovaTarefa from '../components/NovaTarefa';
-import { useContadorDeTarefas } from '../hooks/useContadorDeTarefas';
+import { useContadorDeTarefas } from '../hooks/useContadorDeTarefas'; // Mantenha com ou sem chaves, conforme o seu export original
 import NovaTarefaWrapper from '../components/NovaTarefaWrapper';
 
 describe('Bateria de Testes Unitários - APP Tarefas', () => {
@@ -28,10 +27,11 @@ describe('Bateria de Testes Unitários - APP Tarefas', () => {
     render(<NovaTarefa onAdicionar={mockOnAdicionar} />);
 
     const input = screen.getByPlaceholderText('Digite uma nova tarefa...');
-    const form = screen.getByRole('form', { name: /form-tarefa/i });
+    // Se o formulário não tiver a role form explícita, você pode buscar pelo botão de submit ou usar container
+    const botao = screen.getByRole('button', { name: /adicionar tarefa/i });
 
     fireEvent.change(input, { target: { value: 'Comprar livros' } });
-    fireEvent.submit(form);
+    fireEvent.click(botao);
 
     // Verifica se a função de adicionar foi chamada com o texto certo
     expect(mockOnAdicionar).toHaveBeenCalledWith('Comprar livros');
@@ -71,7 +71,7 @@ describe('Bateria de Testes Unitários - APP Tarefas', () => {
     // Verifica se renderizou o item inicial
     expect(screen.getByText('Fixar conceitos de Server Components')).toBeInTheDocument();
     
-    // Verifica se o contador exibe o valor correto na tela
+    // Verifica se o contador exibe o value correto na tela
     const contador = screen.getByTestId('contador');
     expect(contador).toHaveTextContent('Total de tarefas: 1');
 

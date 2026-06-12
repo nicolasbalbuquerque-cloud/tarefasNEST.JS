@@ -1,14 +1,11 @@
-/** @type {import('jest').Config} */
-const config = {
-  preset: 'ts-jest',
-  testEnvironment: 'jsdom',
-  clearMocks: true,
-  collectCoverage: true,
-  coverageDirectory: "coverage",
-  coverageProvider: "v8",
-  setupFilesAfterEnv: ['@testing-library/jest-dom'],
-  // 🎯 Adicione esta linha abaixo para o Jest encontrar os arquivos .test.tsx dentro da src
-  testMatch: ["**/src/**/*.test.(ts|tsx)"],
+module.exports = {
+  testEnvironment: 'jest-environment-jsdom',
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+  },
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+  },
 };
-
-module.exports = config;

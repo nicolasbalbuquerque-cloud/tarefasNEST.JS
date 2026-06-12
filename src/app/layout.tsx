@@ -6,7 +6,7 @@ export const metadata = {
   description: 'Gerenciador de tarefas acadêmicas',
 };
 
-// 🎯 A palavra "export default" é OBRIGATÓRIA aqui embaixo!
+//  A palavra "export default" é OBRIGATÓRIA aqui embaixo!
 export default function RootLayout({
   children,
 }: {
@@ -14,7 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body style={{ backgroundColor: '#121214', color: '#ffffff', fontFamily: 'sans-serif' }}>
+      {/*  suppressHydrationWarning avisa ao Next.js para ignorar os atributos que as extensões injetam */}
+      <body 
+        suppressHydrationWarning 
+        style={{ backgroundColor: '#121214', color: '#ffffff', fontFamily: 'sans-serif' }}
+      >
         {/* O children representa a sua page.tsx sendo injetada na tela */}
         {children}
       </body>
